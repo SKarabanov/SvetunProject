@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SvetunCharacter.h"
+
+#include "AC_Interaction.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "GAS/AC_AbilitySystem.h"
@@ -45,6 +47,8 @@ ASvetunCharacter::ASvetunCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = true;
 
 	AbilitySystemComponent = CreateDefaultSubobject<UAC_AbilitySystem>(TEXT("AbilitySystemComponent"));
+
+	InteractionComponent = CreateDefaultSubobject<UAC_Interaction>("InteractionComponent");
 }
 
 void ASvetunCharacter::Tick(float DeltaSeconds)
@@ -55,4 +59,9 @@ void ASvetunCharacter::Tick(float DeltaSeconds)
 UAbilitySystemComponent* ASvetunCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void ASvetunCharacter::GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const
+{
+	AbilitySystemComponent->GetOwnedGameplayTags(TagContainer);
 }
