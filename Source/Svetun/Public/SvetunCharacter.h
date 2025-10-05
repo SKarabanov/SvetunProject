@@ -6,6 +6,7 @@
 #include "GameplayTagAssetInterface.h"
 #include "SvetunCharacter.generated.h"
 
+class UAC_Inventory;
 class UAC_Interaction;
 class UAC_AbilitySystem;
 
@@ -26,6 +27,8 @@ public:
 
 	FORCEINLINE UAC_Interaction* GetInteractionComponent() const { return InteractionComponent; }
 
+	FORCEINLINE UAC_Inventory* GetInventoryComponent() const { return InventoryComponent; }
+
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
 
@@ -40,6 +43,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Ability, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UAC_AbilitySystem> AbilitySystemComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Ability, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UAC_Inventory> InventoryComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Ability, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UAC_Interaction> InteractionComponent;
